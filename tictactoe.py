@@ -13,3 +13,8 @@ class TicTacToe:
                     out_string += "|"
             out_string += "\n"
         print(out_string)
+
+    def play(self, move: int):
+        x, y = int(move / self.grid_size), int(move % self.grid_size)
+        print(x, y)
+        self.grid[x][y] = "x"
