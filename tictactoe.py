@@ -29,13 +29,14 @@ class TicTacToe:
         # Using masks is the fun \ unique way, and we are all about learning having fun!
         y, x = np.ogrid[:self.grid_size, :self.grid_size]
 
-        row_mask = (y == 0 & x)
-        print(row_mask)
-        row = self.grid[row_mask]
-        print(row)
+        rows = [self.grid[((y == row) & (x >= 0))] for row in range(self.grid_size)]
+        cols = [self.grid[((y >= 0) & (x == col))] for col in range(self.grid_size)]
 
         diag_mask = (x == y)
         diag = self.grid[diag_mask]
 
         anti_diag_mask = (x + y == self.grid_size - 1)
         anti_diag = self.grid[anti_diag_mask]
+
+        threes = rows+cols+[diag]+[anti_diag]
+        print(threes)
