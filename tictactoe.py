@@ -19,6 +19,7 @@ class TicTacToe:
                     out_string += "|"
             out_string += "\n"
         print(out_string)
+        print(f"Player {self.turn + 1}'s ({self.players[self.turn]}) Turn!")
 
     def play(self, move: int):
         x, y = int(move % self.grid_size), int(move / self.grid_size)
@@ -39,4 +40,11 @@ class TicTacToe:
         anti_diag = self.grid[anti_diag_mask]
 
         threes = rows+cols+[diag]+[anti_diag]
-        print(threes)
+        unique_threes = [np.unique(three) for three in threes]
+        winning_three = [three[0] for three in unique_threes if len(three) == 1]
+
+        if not winning_three:
+            return None
+
+        winner = winning_three[0]
+        return self.players.index(winner) + 1
