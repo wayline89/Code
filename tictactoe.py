@@ -4,6 +4,9 @@ class TicTacToe:
         self.win_size = win_size
         self.grid = [[x+grid_size*y for x in range(grid_size)] for y in range(grid_size)]
 
+        self.players = ["x", "o"]
+        self.turn = 0
+
     def print(self):
         out_string = ""
         for y, row in enumerate(self.grid):
@@ -16,5 +19,5 @@ class TicTacToe:
 
     def play(self, move: int):
         x, y = int(move / self.grid_size), int(move % self.grid_size)
-        print(x, y)
-        self.grid[x][y] = "x"
+        self.grid[x][y] = self.players[self.turn]
+        self.turn = (self.turn + 1) % len(self.players)
