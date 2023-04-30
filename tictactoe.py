@@ -1,8 +1,11 @@
+import numpy as np
+
+
 class TicTacToe:
     def __init__(self, grid_size=3, win_size=3):
         self.grid_size = grid_size
         self.win_size = win_size
-        self.grid = [[x+grid_size*y for x in range(grid_size)] for y in range(grid_size)]
+        self.grid = np.array([str(x) for x in range(9)]).reshape((grid_size, grid_size))
 
         self.players = ["x", "o"]
         self.turn = 0
@@ -18,6 +21,21 @@ class TicTacToe:
         print(out_string)
 
     def play(self, move: int):
-        x, y = int(move / self.grid_size), int(move % self.grid_size)
-        self.grid[x][y] = self.players[self.turn]
+        x, y = int(move % self.grid_size), int(move / self.grid_size)
+        self.grid[y, x] = self.players[self.turn]
         self.turn = (self.turn + 1) % len(self.players)
+
+    def evaluate(self):
+        # Using masks is the fun \ unique way, and we are all about learning having fun!
+        y, x = np.ogrid[:self.grid_size, :self.grid_size]
+
+        row_mask = (y == 0 & x)
+        print(row_mask)
+        row = self.grid[row_mask]
+        print(row)
+
+        diag_mask = (x == y)
+        diag = self.grid[diag_mask]
+
+        anti_diag_mask = (x + y == self.grid_size - 1)
+        anti_diag = self.grid[anti_diag_mask]

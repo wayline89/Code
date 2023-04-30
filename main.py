@@ -8,3 +8,4 @@ if __name__ == "__main__":
         ttt.print()
         move = int(input())
         ttt.play(move)
+        ttt.evaluate()
