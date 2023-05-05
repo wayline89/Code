@@ -27,6 +27,10 @@ class TicTacToe:
 
     def play(self, move: int):
         x, y = int(move % self.grid_size), int(move / self.grid_size)
+        if self.grid[x, y] in self.players:
+            print("Invalid move, please try again")
+            return
+
         turn = self.current_move % 2
         self.grid[y, x] = self.players[turn]
         self.current_move += 1
