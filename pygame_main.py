@@ -8,11 +8,11 @@ pygame.display.set_caption("Tic-Tac-Toe")
 clock = pygame.time.Clock()
 
 ttt = TicTacToe()
+ttt.print()
 tile_size = WIDTH / ttt.grid_size
 
 def main():
     winner = None
-
     run = True
     while run:
         clock.tick(FPS)
@@ -30,10 +30,20 @@ def main():
                 if event.button == 1:  # Left Click
                     mouse_pos = pygame.mouse.get_pos()
                     x, y = int(mouse_pos[0] / tile_size), int(mouse_pos[1] / tile_size)
-                    print(x, y)
+                    ttt.play((x, y))
+                    ttt.print()
+                    over, winner = ttt.evaluate()
+                    if over:
+                        run = False
+                        break
 
         draw(WIN)
 
+    ttt.print()
+    if winner:
+        print(f'Congratulations Player {winner} for winning the game!')
+    else:
+        print(f"It's a tie!")
     pygame.quit()
 
 

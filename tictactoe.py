@@ -1,5 +1,5 @@
 import numpy as np
-
+from typing import Union
 
 class TicTacToe:
     def __init__(self, grid_size=3, win_size=3):
@@ -25,15 +25,21 @@ class TicTacToe:
         print(out_string)
         print(f"Player {turn + 1}'s ({self.players[turn]}) Turn!")
 
-    def play(self, move: int):
-        x, y = int(move % self.grid_size), int(move / self.grid_size)
-        if self.grid[x, y] in self.players:
+    def play(self, move: Union[int, tuple]):
+        if type(move) is tuple:
+            x, y = move
+        else:
+            # Move is a number
+            x, y = int(move % self.grid_size), int(move / self.grid_size)
+
+        if self.grid[y, x] in self.players:
             print("Invalid move, please try again")
-            return
+            return False, None
 
         turn = self.current_move % 2
         self.grid[y, x] = self.players[turn]
         self.current_move += 1
+        return self.evaluate()
 
     def evaluate(self):
         if self.current_move >= self.max_moves:

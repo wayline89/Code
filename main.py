@@ -8,8 +8,7 @@ if __name__ == "__main__":
     while run:
         ttt.print()
         move = int(input())
-        ttt.play(move)
-        over, winner = ttt.evaluate()
+        over, winner = ttt.play(move)
         if over:
             run = False
     ttt.print()
