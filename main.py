@@ -9,8 +9,11 @@ if __name__ == "__main__":
         ttt.print()
         move = int(input())
         ttt.play(move)
-        winner = ttt.evaluate()
-        if winner:
+        over, winner = ttt.evaluate()
+        if over:
             run = False
     ttt.print()
-    print(f'Congratulations Player {winner} for winning the game!')
+    if winner:
+        print(f'Congratulations Player {winner} for winning the game!')
+    else:
+        print(f"It's a tie!")

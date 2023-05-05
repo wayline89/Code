@@ -8,9 +8,13 @@ class TicTacToe:
         self.grid = np.array([str(x) for x in range(9)]).reshape((grid_size, grid_size))
 
         self.players = ["x", "o"]
-        self.turn = 0
+        # self.turn = 0 - only remove this after getting it to work at all because we notice it is now redundant.
+
+        self.max_moves = self.grid_size * self.grid_size
+        self.current_move = 0
 
     def print(self):
+        turn = self.current_move % 2
         out_string = ""
         for y, row in enumerate(self.grid):
             for x, col in enumerate(row):
@@ -19,14 +23,18 @@ class TicTacToe:
                     out_string += "|"
             out_string += "\n"
         print(out_string)
-        print(f"Player {self.turn + 1}'s ({self.players[self.turn]}) Turn!")
+        print(f"Player {turn + 1}'s ({self.players[turn]}) Turn!")
 
     def play(self, move: int):
         x, y = int(move % self.grid_size), int(move / self.grid_size)
-        self.grid[y, x] = self.players[self.turn]
-        self.turn = (self.turn + 1) % len(self.players)
+        turn = self.current_move % 2
+        self.grid[y, x] = self.players[turn]
+        self.current_move += 1
 
     def evaluate(self):
+        if self.current_move >= self.max_moves:
+            return True, None
+
         # Using masks is the fun \ unique way, and we are all about learning having fun!
         y, x = np.ogrid[:self.grid_size, :self.grid_size]
 
@@ -44,7 +52,7 @@ class TicTacToe:
         winning_three = [three[0] for three in unique_threes if len(three) == 1]
 
         if not winning_three:
-            return None
+            return False, None
 
         winner = winning_three[0]
-        return self.players.index(winner) + 1
+        return True, self.players.index(winner) + 1
