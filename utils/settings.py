@@ -1,9 +1,7 @@
 import pygame
 pygame.init()
 
-GRID_SIZE = pygame.Vector2(100, 100)
-CELL_SIZE = 5
-WINDOW_SIZE = GRID_SIZE * CELL_SIZE
+WIDTH = HEIGHT = 600
 
 FPS = 100
 
