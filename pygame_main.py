@@ -5,9 +5,10 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Tic-Tac-Toe")
 clock = pygame.time.Clock()
 
+ttt = TicTacToe()
+tile_size = WIDTH / ttt.grid_size
+
 def main():
-    ttt = TicTacToe()
-    tile_size = WIDTH / ttt.grid_size
     winner = None
 
     run = True
@@ -35,6 +36,12 @@ def main():
 
 def draw(win: pygame.display):
     win.fill(WHITE)
+
+    line_width = 5
+    for i in range(1, 3):
+        pygame.draw.line(WIN, BLACK, (tile_size*i, 0), (tile_size*i, HEIGHT), line_width)
+        pygame.draw.line(WIN, BLACK, (0, tile_size*i), (WIDTH, tile_size*i), line_width)
+
     pygame.display.update()
 
 
