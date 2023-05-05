@@ -1,3 +1,5 @@
+import pygame
+
 from utils import *
 from tictactoe import TicTacToe
 
@@ -24,10 +26,11 @@ def main():
                 run = False
                 break
 
-            mouse_pos = pygame.mouse.get_pos()
-            x = int(mouse_pos[0] / tile_size)
-            y = int(mouse_pos[1] / tile_size)
-            print(x, y)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left Click
+                    mouse_pos = pygame.mouse.get_pos()
+                    x, y = int(mouse_pos[0] / tile_size), int(mouse_pos[1] / tile_size)
+                    print(x, y)
 
         draw(WIN)
 
