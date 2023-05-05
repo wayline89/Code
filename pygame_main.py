@@ -39,8 +39,9 @@ def draw(win: pygame.display):
 
     line_width = 5
     for i in range(1, 3):
-        pygame.draw.line(WIN, BLACK, (tile_size*i, 0), (tile_size*i, HEIGHT), line_width)
-        pygame.draw.line(WIN, BLACK, (0, tile_size*i), (WIDTH, tile_size*i), line_width)
+        line_pos = tile_size*i - line_width/2
+        pygame.draw.line(WIN, BLACK, (line_pos, 0), (line_pos, HEIGHT), line_width)
+        pygame.draw.line(WIN, BLACK, (0, line_pos), (WIDTH, line_pos), line_width)
 
     pygame.display.update()
 
