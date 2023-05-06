@@ -2,13 +2,11 @@ import numpy as np
 from typing import Union
 
 class TicTacToe:
-    def __init__(self, grid_size=3, win_size=3):
+    def __init__(self, players, grid_size=3, win_size=3):
         self.grid_size = grid_size
         self.win_size = win_size
         self.grid = np.array([str(x) for x in range(9)]).reshape((grid_size, grid_size))
-
-        self.players = ["x", "o"]
-        # self.turn = 0 - only remove this after getting it to work at all because we notice it is now redundant.
+        self.players = players
 
         self.max_moves = self.grid_size * self.grid_size
         self.current_move = 0
