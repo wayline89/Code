@@ -8,8 +8,8 @@ class TicTacToe:
         self.grid = np.array([str(x) for x in range(9)]).reshape((grid_size, grid_size))
         self.players = players
 
-        self.max_moves = self.grid_size * self.grid_size
         self.current_move = 0
+        self.max_moves = self.grid_size * self.grid_size - 1
 
     def print(self):
         turn = self.current_move % 2
@@ -39,13 +39,12 @@ class TicTacToe:
 
         self.grid[y, x] = self.get_current_player()
         result = self.evaluate()
+        print(result)
+
         self.current_move += 1
         return result
 
     def evaluate(self):
-        if self.current_move >= self.max_moves:
-            return True, None
-
         # Using masks is the fun \ unique way, and we are all about learning having fun!
         y, x = np.ogrid[:self.grid_size, :self.grid_size]
 
@@ -63,6 +62,8 @@ class TicTacToe:
         winning_three = [three[0] for three in unique_threes if len(three) == 1]
 
         if not winning_three:
+            if self.current_move >= self.max_moves:
+                return True, None
             return False, None
 
         winner = winning_three[0]

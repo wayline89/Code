@@ -16,7 +16,7 @@ images = [
 ]
 dict_player_image = dict(zip(players, images))
 
-img_board = load_image_scaled('assets/art/board.png', (WIDTH, HEIGHT))
+img_board = load_image_scaled('assets/art/board.png', (WIDTH * 0.85, HEIGHT * 0.85))
 
 def main():
     winner = None
@@ -55,22 +55,18 @@ def main():
 def draw(win: pygame.display, ttt: TicTacToe):
     def draw_tic_tac_toe():
         # Draw the Game Grid
-        line_width = 5
-        for i in range(1, ttt.grid_size):
-            line_pos = tile_size * i - line_width / 2
-            pygame.draw.line(WIN, BLACK, (line_pos, 0), (line_pos, HEIGHT), line_width)
-            pygame.draw.line(WIN, BLACK, (0, line_pos), (WIDTH, line_pos), line_width)
+        WIN.blit(img_board, ((WIDTH - img_board.get_width()) / 2, (HEIGHT - img_board.get_width()) / 2))
 
         # Draw the Naughts and Crosses
         for y, row in enumerate(ttt.grid):
             for x, player in enumerate(row):
                 if player in players:
-                    rect = pygame.Rect(x * tile_size, y * tile_size, tile_size - line_width, tile_size - line_width)
+                    rect = pygame.Rect(x * tile_size, y * tile_size, tile_size, tile_size)
                     WIN.blit(dict_player_image[player], rect)
 
         # Draw Move Indicator
         text_surface = ttt_font.render(f'Current Player: {ttt.get_current_player()}', False, BLACK)
-        WIN.blit(text_surface, (0, 0))
+        WIN.blit(text_surface, (10, 0))
 
     win.fill(WHITE)
 
