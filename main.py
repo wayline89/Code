@@ -1,8 +1,9 @@
 import tictactoe
 
+players = ['x', 'o']
 
 if __name__ == "__main__":
-    ttt = tictactoe.TicTacToe()
+    ttt = tictactoe.TicTacToe(players)
     winner = None
     run = True
     while run:
