@@ -8,12 +8,13 @@ pygame.display.set_caption("Tic-Tac-Toe")
 clock = pygame.time.Clock()
 
 players = ["x", "o"]
-images = [pygame.image.load('assets/art/cross.png'), pygame.image.load('assets/art/naught.png')]
-dict_player_image = dict(zip(players, images))
-
 ttt = TicTacToe(players)
 ttt.print()
 tile_size = WIDTH / ttt.grid_size
+images = [
+    load_image_scaled('assets/art/cross.png', (tile_size, tile_size)),
+    load_image_scaled('assets/art/naught.png', (tile_size, tile_size))]
+dict_player_image = dict(zip(players, images))
 
 def main():
     winner = None
