@@ -8,8 +8,8 @@ pygame.display.set_caption("Tic-Tac-Toe")
 clock = pygame.time.Clock()
 
 players = ["x", "o"]
-colors = [GREEN, RED]
-dict_player_color = dict(zip(players, colors))
+images = [pygame.image.load('assets/art/cross.png'), pygame.image.load('assets/art/naught.png')]
+dict_player_image = dict(zip(players, images))
 
 ttt = TicTacToe(players)
 ttt.print()
@@ -63,9 +63,9 @@ def draw(win: pygame.display, ttt: TicTacToe):
         # Draw the Naughts and Crosses
         for y, row in enumerate(ttt.grid):
             for x, player in enumerate(row):
-                if player in ttt.players:
+                if player in players:
                     rect = pygame.Rect(x * tile_size, y * tile_size, tile_size - line_width, tile_size - line_width)
-                    pygame.draw.rect(WIN, dict_player_color[player], rect)
+                    WIN.blit(dict_player_image[player], rect)
 
     win.fill(WHITE)
 
