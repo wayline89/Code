@@ -35,9 +35,7 @@ def main():
                 if event.button == 1:  # Left Click
                     mouse_pos = pygame.mouse.get_pos()
                     x, y = int(mouse_pos[0] / tile_size), int(mouse_pos[1] / tile_size)
-                    ttt.play((x, y))
-                    ttt.print()
-                    over, winner = ttt.evaluate()
+                    over, winner = ttt.play((x, y))
                     if over:
                         run = False
                         break
