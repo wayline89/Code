@@ -36,8 +36,9 @@ class TicTacToe:
 
         turn = self.current_move % 2
         self.grid[y, x] = self.players[turn]
+        result = self.evaluate()
         self.current_move += 1
-        return self.evaluate()
+        return result
 
     def evaluate(self):
         if self.current_move >= self.max_moves:
