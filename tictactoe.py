@@ -23,6 +23,9 @@ class TicTacToe:
         print(out_string)
         print(f"Player {turn + 1}'s ({self.players[turn]}) Turn!")
 
+    def get_current_player(self):
+        return self.players[self.current_move % len(self.players)]
+
     def play(self, move: Union[int, tuple]):
         if type(move) is tuple:
             x, y = move
@@ -34,8 +37,7 @@ class TicTacToe:
             print("Invalid move, please try again")
             return False, None
 
-        turn = self.current_move % 2
-        self.grid[y, x] = self.players[turn]
+        self.grid[y, x] = self.get_current_player()
         result = self.evaluate()
         self.current_move += 1
         return result

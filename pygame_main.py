@@ -9,12 +9,14 @@ clock = pygame.time.Clock()
 
 players = ["x", "o"]
 ttt = TicTacToe(players)
-ttt.print()
 tile_size = WIDTH / ttt.grid_size
 images = [
     load_image_scaled('assets/art/cross.png', (tile_size, tile_size)),
-    load_image_scaled('assets/art/naught.png', (tile_size, tile_size))]
+    load_image_scaled('assets/art/naught.png', (tile_size, tile_size))
+]
 dict_player_image = dict(zip(players, images))
+
+img_board = load_image_scaled('assets/art/board.png', (WIDTH, HEIGHT))
 
 def main():
     winner = None
@@ -65,6 +67,10 @@ def draw(win: pygame.display, ttt: TicTacToe):
                 if player in players:
                     rect = pygame.Rect(x * tile_size, y * tile_size, tile_size - line_width, tile_size - line_width)
                     WIN.blit(dict_player_image[player], rect)
+
+        # Draw Move Indicator
+        text_surface = ttt_font.render(f'Current Player: {ttt.get_current_player()}', False, BLACK)
+        WIN.blit(text_surface, (0, 0))
 
     win.fill(WHITE)
 
