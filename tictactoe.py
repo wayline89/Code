@@ -39,7 +39,6 @@ class TicTacToe:
 
         self.grid[y, x] = self.get_current_player()
         result = self.evaluate()
-        print(result)
 
         self.current_move += 1
         return result

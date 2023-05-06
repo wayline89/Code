@@ -16,7 +16,8 @@ images = [
 ]
 dict_player_image = dict(zip(players, images))
 
-img_board = load_image_scaled('assets/art/board.png', (WIDTH * 0.85, HEIGHT * 0.85))
+img_board = load_image_scaled('assets/art/board.png', (WIDTH * 0.925, HEIGHT * 0.925))
+img_background = load_image_scaled('assets/art/background.png', (WIDTH, HEIGHT))
 
 def main():
     winner = None
@@ -54,6 +55,8 @@ def main():
 
 def draw(win: pygame.display, ttt: TicTacToe):
     def draw_tic_tac_toe():
+        # Draw the Background
+        WIN.blit(img_background, (0, 0))
         # Draw the Game Grid
         WIN.blit(img_board, ((WIDTH - img_board.get_width()) / 2, (HEIGHT - img_board.get_width()) / 2))
 
