@@ -37,7 +37,7 @@ def main():
                         run = False
                         break
 
-        draw(WIN)
+        draw(WIN, ttt)
 
     ttt.print()
     if winner:
@@ -47,14 +47,25 @@ def main():
     pygame.quit()
 
 
-def draw(win: pygame.display):
+def draw(win: pygame.display, ttt: TicTacToe):
+    def draw_tic_tac_toe():
+        # Draw the Game Gird
+        line_width = 5
+        for i in range(1, ttt.grid_size):
+            line_pos = tile_size * i - line_width / 2
+            pygame.draw.line(WIN, BLACK, (line_pos, 0), (line_pos, HEIGHT), line_width)
+            pygame.draw.line(WIN, BLACK, (0, line_pos), (WIDTH, line_pos), line_width)
+
+        # Draw the Naughts and Crosses
+        for y, row in enumerate(ttt.grid):
+            for x, value in enumerate(row):
+                if value in ttt.players:
+                    rect = pygame.Rect(x * tile_size, y * tile_size, tile_size, tile_size)
+                    pygame.draw.rect(WIN, BLACK, rect)
+
     win.fill(WHITE)
 
-    line_width = 5
-    for i in range(1, 3):
-        line_pos = tile_size*i - line_width/2
-        pygame.draw.line(WIN, BLACK, (line_pos, 0), (line_pos, HEIGHT), line_width)
-        pygame.draw.line(WIN, BLACK, (0, line_pos), (WIDTH, line_pos), line_width)
+    draw_tic_tac_toe()
 
     pygame.display.update()
 
